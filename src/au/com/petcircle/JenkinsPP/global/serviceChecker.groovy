@@ -3,128 +3,91 @@
 package au.com.petcircle.JenkinsPP.global
 
 class serviceChecker {
-    serviceValues v = new serviceValues();
-
-    serviceValues getValues(String serviceName){
-        switch (serviceName){
-            case "shiba" :
-                v.setMin(10);
-                v.setMax(19);
-                v.setBaseName("shiba00");
-                v.setBaseIp("10.50.0.10");
-                break;
-            case "minpin" :
-                v.setMin(10);
-                v.setMax(19);
-                v.setBaseName("minpin00");
-                v.setBaseIp("10.50.10.10");
-                break;
-            case "product" :
-                v.setMin(20);
-                v.setMax(29);
-                v.setBaseName("labrador-product00");
-                v.setBaseIp("10.50.10.20");
-                break;
-            case "payment" :
-                v.setMin(30);
-                v.setMax(39);
-                v.setBaseName("labrador-payment00");
-                v.setBaseIp("10.50.10.30");
-                break;
-            case "customer":
-                v.setMin(40);
-                v.setMax(49);
-                v.setBaseName("labrador-customer00");
-                v.setBaseIp("10.50.10.40");
-                break;
-            case "order":
-                v.setMin(50);
-                v.setMax(59);
-                v.setBaseName("labrador-order00");
-                v.setBaseIp("10.50.10.50");
-                break;
-            case "merch":
-                v.setMin(60);
-                v.setMax(69);
-                v.setBaseName("labrador-merch00");
-                v.setBaseIp("10.50.10.60");
-                break;
-            case "shipping":
-                v.setMin(70);
-                v.setMax(79);
-                v.setBaseName("labrador-shipping00");
-                v.setBaseIp("10.50.10.70");
-                break;
-            case "search":
-                v.setMin(80);
-                v.setMax(89);
-                v.setBaseName("labrador-search00");
-                v.setBaseIp("10.50.10.80");
-                break;
-            case "review":
-                v.setMin(90);
-                v.setMax(99);
-                v.setBaseName("labrador-review00");
-                v.setBaseIp("10.50.10.90");
-                break;
-        }
-        return v;
-    }
-
-    int getMin(String serviceName) {
-        v = this.getValues(serviceName);
-        return v.getMin();
-    }
-    int getMax(String serviceName) {
-        v = this.getValues(serviceName);
-        return v.getMax();
-    }
-    String getBaseName(String serviceName) {
-        v = this.getValues(serviceName);
-        return v.getBaseName();
-    }
-    String getBaseIp(String serviceName) {
-        v = this.getValues(serviceName);
-        return v.getBaseIp();
-    }
-
-}
-
-class serviceValues {
     int min;
     int max;
     String baseName;
     String baseIp;
 
-    int getMin() {
-        return min
+    void setValues(String serviceName){
+        switch (serviceName){
+            case "shiba" :
+                min = 10;
+                max = 19;
+                baseName = "shiba00";
+                baseIp = "10.50.0.10";
+                break;
+            case "minpin" :
+                min = 10;
+                max = 19;
+                baseName = "minpin00";
+                baseIp = "10.50.10.10";
+                break;
+            case "product" :
+                min = 20;
+                max = 29;
+                baseName = "labrador-product00";
+                baseIp = "10.50.10.20";
+                break;
+            case "payment" :
+                min = 30;
+                max = 39;
+                baseName = "labrador-payment00";
+                baseIp = "10.50.10.30";
+                break;
+            case "customer":
+                min = 40;
+                max = 49;
+                baseName = "labrador-customer00";
+                baseIp = "10.50.10.40";
+                break;
+            case "order":
+                min = 50;
+                max = 59;
+                baseName = "labrador-order00";
+                baseIp = "10.50.10.50";
+                break;
+            case "merch":
+                min = 60;
+                max = 69;
+                baseName = "labrador-merch00";
+                baseIp = "10.50.10.60";
+                break;
+            case "shipping":
+                min = 70;
+                max = 79;
+                baseName = "labrador-shipping00";
+                baseIp = "10.50.10.70";
+                break;
+            case "search":
+                min = 80;
+                max = 89;
+                baseName = "labrador-search00";
+                baseIp = "10.50.10.80";
+                break;
+            case "review":
+                min = 90;
+                max = 99;
+                baseName = "labrador-review00";
+                baseIp = "10.50.10.90";
+                break;
+        }
     }
 
-    void setMin(int min) {
-        this.min = min
+    int getMin(String serviceName) {
+        setValues();
+        return min;
+    }
+    int getMax(String serviceName) {
+        setValues();
+        return max;
+    }
+    String getBaseName(String serviceName) {
+        setValues();
+        return baseName;
+    }
+    String getBaseIp(String serviceName) {
+        setValues();
+        return baseIp;
     }
 
-    int getMax() {
-        return max
-    }
-
-    void setMax(int max) {
-        this.max = max
-    }
-
-    String getBaseName() {
-        return baseName
-    }
-
-    void setBaseName(String baseName) {
-        this.baseName = baseName
-    }
-
-    String getBaseIp() {
-        return baseIp
-    }
-
-    void setBaseIp(String baseIp) {
-        this.baseIp = baseIp
-    }
 }

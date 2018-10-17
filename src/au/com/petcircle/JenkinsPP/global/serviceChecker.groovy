@@ -74,19 +74,19 @@ class serviceChecker {
     }
 
     int getMin(String serviceName) {
-        setValues();
+        setValues(serviceName);
         return min;
     }
     int getMax(String serviceName) {
-        setValues();
+        setValues(serviceName);
         return max;
     }
     String getBaseName(String serviceName) {
-        setValues();
+        setValues(serviceName);
         return baseName;
     }
     String getBaseIp(String serviceName) {
-        setValues();
+        setValues(serviceName);
         return baseIp;
     }
 

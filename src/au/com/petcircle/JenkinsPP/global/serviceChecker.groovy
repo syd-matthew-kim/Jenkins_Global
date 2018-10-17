@@ -3,7 +3,7 @@
 package au.com.petcircle.JenkinsPP.global
 
 class serviceChecker {
-    serviceValues v = new serviceValues();
+    au.com.petcircle.JenkinsPP.global.serviceValues v = new au.com.petcircle.JenkinsPP.global.serviceValues();
 
     serviceValues getValues(String serviceName){
         switch (serviceName){

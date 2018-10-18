@@ -179,8 +179,4 @@ class serviceChecker {
         sh(script:"gcloud compute instances create ${ins_name} --private-network-ip=${ins_ip} --zone=${ins_zone} --no-address --subnet=pc-prod-cloud-public-subnet-a-10-50-0-0-24 --source-instance-template=prod-medium-tomcat-fast-private-template-1 --labels=type=app")
     }
 
-
-
-
-
 }

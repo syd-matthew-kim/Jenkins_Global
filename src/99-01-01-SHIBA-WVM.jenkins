@@ -1,0 +1,239 @@
+@Library('serviceChecker')_
+import au.com.petcircle.JenkinsPP.global.serviceChecker;
+import java.util.zip.ZipOutputStream
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+
+node {
+
+    def SERVICENAME = "${params.service}".trim()
+    def SERVICENAME1 = "${params.service1}".trim()
+    def VERSION = "${params.version}".trim()
+    def WORKSPACE = pwd()
+    Date date = new Date()
+    def TODAY = date.format("yyyy-MM-dd HH-mm-ss")
+
+    stage('Vallidation & Check Password') {
+        if ("$SERVICENAME" != "$SERVICENAME1")
+        {
+            error("Check your serviceName")
+        }
+        withCredentials([string(credentialsId: 'PROD_ID', variable: 'E_secret')]) {
+            if ("$E_secret" != "${params.password}") {
+                error("Wrong Password")
+            }
+        }
+        deleteDir()
+    }
+
+    /*
+    withCredentials
+    */
+    stage('set up project service Account') {
+        sh "gcloud config configurations activate devtest"
+    }
+
+    stage('Get Properties from GCP Repository'){
+        git(
+                url: 'https://source.developers.google.com/p/petcircle-devtest-cloud/r/Properties',
+                credentialsId: 'source:DevTest',
+                branch: "master"
+        )
+    }
+    /*
+    1. Pass service name from parameter
+    2. Get Current server number, IP Address and zone Information
+    3. Generate VM name based on service name and server number.
+    4. Generate IP Address based on current.
+    5. Generate Zone Information based on current.
+    */
+
+    def SC = new au.com.petcircle.JenkinsPP.global.serviceChecker()
+    int min = SC.getMin("$SERVICENAME");
+    int max = SC.getMax("$SERVICENAME");
+    String baseName = SC.getBaseName("$SERVICENAME");
+    String baseIp = SC.getBaseIp("$SERVICENAME");
+
+    stage('Create a VM Instance') {
+
+        SC.checkInstances("$SERVICENAME")
+
+        if ( SC.isExist("$SERVICENAME") )
+        {
+            /**
+            def ins_num = readFile('InsNum').trim()
+            def ins_zone = readFile('InsZone').trim()
+            def ins_ip = readFile('InsIpaddr').trim()
+             */
+            def ins_num = SC.getInsNum("$SERVICENAME")
+            def ins_zone = SC.getInsZone("$SERVICENAME")
+            def cur_ip = SC.getCurIP("$SERVICENAME")
+            def ins_ip = SC.getInsIP("$min", "$max", "$cur_ip")
+            def ins_name = SC.getInsName("$SERVICENAME", "$ins_num")
+
+            SC.createInstance("$ins_name", "$ins_zone", "$ins_ip")
+        }else{
+            SC.createInstance("$baseName", "$baseIp")
+        }
+    }
+
+    stage('Waiting 30 Seconds'){
+        echo 'Waiting 30 Seconds for VM to start Tomcat Server'
+        sleep 30 // seconds
+    }
+/*
+    stage('Get Artifact from Nexus') {
+        echo "$VERSION"
+        artifactResolver artifacts: [artifact(artifactId: SERVICENAME, extension: 'war', groupId: 'au.com.petcircle', version: '$VERSION')], targetDirectory: 'target'
+    }
+
+    stage('Setup Configuration Files') {
+        def ARTIFACT_PATH = sh(script: "ls target/*.war", returnStdout: true).trim()
+        def ARTIFACT_PATH_FULL = "${WORKSPACE}/${ARTIFACT_PATH}"
+
+        echo "STEP 1. Create a Folder"
+        createFolder()
+        echo "STEP 2. COPY properties, logback and Context.xml"
+        copyProperties( SERVICENAME, WORKSPACE)
+        echo "STEP 3. Update Jar files"
+        updateJar(ARTIFACT_PATH_FULL)
+        echo "STEP 4. Update Version Screen"
+        String cur = readFile('current').trim();
+        if ( cur.length() == 0)
+        {
+            updateVer(SERVICENAME, "shiba00", VERSION, TODAY)
+        }else{
+            def ins_num = readFile('InsNum').trim()
+            String insName = nextSvrName(SERVICENAME, ins_num)
+            updateVer(SERVICENAME, insName, VERSION, TODAY)
+        }
+
+
+        archiveArtifacts 'target/*.war*'
+    }
+
+    stage('Deploy.') {
+        def WAR_PATH_RELATIVE = sh(script: "ls target/*.war", returnStdout: true).trim()
+        def WAR_PATH_FULL = "${WORKSPACE}/${WAR_PATH_RELATIVE}"
+        def insIpad, ins_ip
+        String cur = readFile('current').trim();
+        if ( cur.length() == 0)
+        {
+            insIpad = "${baseIp}"
+        }else{
+            ins_ip = readFile('InsIpaddr').trim()
+            insIpad = nextIpad("${min}", "${max}", "${ins_ip}")
+        }
+
+        withCredentials([usernamePassword(credentialsId: 'Manager_Tomcat', passwordVariable: 'manager_pass', usernameVariable: 'manager_id')]) {
+            echo "Deploying application to http://${insIpad}/"
+            def output = deploy(WAR_PATH_FULL, insIpad, env.manager_id, env.manager_pass)
+            if (output.contains("FAIL - Deployed application at context path / but context failed to start")) {
+                echo "----- PUPPY deployment log -----"
+                echo output
+                echo "-------------------------------"
+                currentBuild.result = 'FAILURE'
+            }
+        }
+        echo "Done."
+    }
+*/
+}
+/**
+def chkcursvc(service){
+    sh(script:"gcloud compute instances list |grep ${service} |sort -u > current", reutnrStdout: true)
+    sh(script:"cat current|awk '{print \$1}'|tail -1 |cut -d'-' -f2 > InsNum", reutnrStdout: false)
+    sh(script:"cat current|awk '{print \$1}'|tail -1 > InsName", reutnrStdout: false)
+    sh(script:"cat current|awk '{print \$2}'|tail -1 > InsZone", reutnrStdout: false)
+    sh(script:"cat current|awk '{print \$4}'|tail -1 > InsIpaddr", reutnrStdout: false)
+}
+def createInstance(baseName, baseIp)
+{
+    sh(script:"gcloud compute instances create ${baseName} --private-network-ip=${baseIp} --zone=australia-southeast1-b  --no-address --subnet=pc-prod-cloud-public-subnet-a-10-50-0-0-24 --source-instance-template=prod-medium-tomcat-fast-private-template-1 --labels=type=app")
+}
+
+
+def createInstance(service, ins_num, ins_zone, ins_ip, min, max)
+{
+    String insName = nextSvrName(service, ins_num)
+    String insZone = nextZone(ins_zone)
+    String insIpad = nextIpad(min, max, ins_ip)
+
+    sh(script:"gcloud compute instances create ${insName} --private-network-ip=${insIpad} --zone=${insZone} --no-address --subnet=pc-prod-cloud-public-subnet-a-10-50-0-0-24 --source-instance-template=prod-medium-tomcat-fast-private-template-1 --labels=type=app")
+}
+
+
+def nextSvrName(service, ins_num)
+{
+    ins_num = String.format("%02d", Integer.parseInt(ins_num.substring(service.length())) + 1)
+    String svrName = "${service}${ins_num}";
+    return svrName;
+}
+
+def nextZone(ins_zone)
+{
+    switch (ins_zone){
+        case "australia-southeast1-a" :
+            ins_zone = "australia-southeast1-b"
+            break;
+        case "australia-southeast1-b" :
+            ins_zone = "australia-southeast1-c"
+            break;
+        case "australia-southeast1-c" :
+            ins_zone = "australia-southeast1-a"
+            break;
+    }
+    return ins_zone;
+}
+
+def nextIpad(min, max, ins_ip)
+{
+    String Sins_ip = ins_ip;
+    int Imin = min;
+    int Imax = max;
+
+    int last = Integer.parseInt((Sins_ip.substring(Sins_ip.lastIndexOf(".") + 1))) + 1;
+
+    if (last <= Imax)
+    {
+        last = Math.min(Integer.parseInt((Sins_ip.substring(Sins_ip.lastIndexOf(".") + 1)))+1, Imax);
+    }else {
+        last = Imin;
+    }
+    String new_ip = Sins_ip.substring(0, Sins_ip.lastIndexOf(".") + 1) + last;
+    return new_ip;
+}
+
+ */
+
+def deploy(warPathFull, serviceName, username, password) {
+    def output = sh script: "curl --upload-file '${warPathFull}' " +
+            "'http://${username}:${password}@${serviceName}/manager/text/deploy" +
+            "?path=/&update=true'", returnStdout: true
+    return output
+}
+
+def createFolder() {
+    def output0 = sh script: "mkdir -p WEB-INF/classes", returnStdout: true
+    def output1 = sh script:"mkdir -p META-INF/", returnStdout: true
+    return output0
+}
+
+def copyProperties(service, current){
+    def output0 = sh script:"cp prod/${service}.log4j.lcf ${current}/WEB-INF/classes/log4j.lcf", reutnrStdout: true
+    def output1 = sh script:"cp prod/vizsla.properties ${current}/WEB-INF/classes/vizsla.properties", reutnrStdout: true
+    def output2 = sh script:"cp prod/${service}.context ${current}/META-INF/context.xml", reutnrStdout: true
+    return output0
+}
+
+def updateJar(artifact){
+    def output0 = sh script:"cp ${artifact} ${artifact}.old", reutnrStdout: true
+    def output1 = sh script:"jar uvf ${artifact} WEB-INF/classes/", reutnrStdout: true
+    def output2 = sh script:"jar uvf ${artifact} META-INF/context.xml", reutnrStdout: true
+    return output0
+}
+
+def updateVer(service, dest, version, today){
+    def output = sh script:"sed -i \"s/${dest}.*/${dest}=${version},${today}/\" /opt/currentVersion/${service}", reutnrStdout: true
+    return output
+}

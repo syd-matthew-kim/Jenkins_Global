@@ -14,7 +14,7 @@ class instanceGroup {
         sh "cp prod/${service}.context ${current}/META-INF/context.xml"
     }
 
-    void updateVer(String service, String dest, String version, Date today) {
+    void updateVer(String service, String dest, String version, String today) {
         sh "sed -i \\\"s/${dest}.*/${dest}=${version},${today}/\\\" /opt/currentVersion/${service}"
     }
 
@@ -25,29 +25,29 @@ class instanceGroup {
             case "product" : case "review":
                 svrIP1 = "10.50.10.21"
                 svrIP2 = "10.50.10.22"
-                svrName1 = "IG101"
-                svrName2 = "IG102"
+                svrName1 = "ig101"
+                svrName2 = "ig102"
                 break
 
             case "merch": case "order": case "search":
                 svrIP1 = "10.50.10.31"
                 svrIP2 = "10.50.10.32"
-                svrName1 = "IG201"
-                svrName2 = "IG202"
+                svrName1 = "ig201"
+                svrName2 = "ig202"
                 break
 
             case "payment" : case "customer":
                 svrIP1 = "10.50.10.41"
                 svrIP2 = "10.50.10.42"
-                svrName1 = "IG301"
-                svrName2 = "IG302"
+                svrName1 = "ig301"
+                svrName2 = "ig302"
                 break
 
             case "shipping":
                 svrIP1 = "10.50.10.51"
                 svrIP2 = "10.50.10.52"
-                svrName1 = "IG401"
-                svrName2 = "IG402"
+                svrName1 = "ig401"
+                svrName2 = "ig402"
                 break
         }
     }

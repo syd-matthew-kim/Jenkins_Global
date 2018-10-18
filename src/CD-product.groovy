@@ -9,7 +9,7 @@ node{
     String VERSION = "${params.version}".trim()
     String WORKSPACE = pwd()
     Date date = new Date()
-    Date TODAY = date.format("yyyy-MM-dd HH-mm-ss")
+    String TODAY = date.format("yyyy-MM-dd HH-mm-ss")
 
     stage('Vallidation & Check Password') {
         if ("$SERVICENAME" != "$SERVICENAME1")

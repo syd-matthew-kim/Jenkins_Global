@@ -7,7 +7,7 @@ class instanceGroup {
     String svrIP1, svrIP2, svrName1, svrName2
     void setSvrIPs(String service) {
 
-        switch (${service}) {
+        switch (service) {
             case "product" : case "review":
                 svrIP1 = "10.50.10.21"
                 svrIP2 = "10.50.10.22"

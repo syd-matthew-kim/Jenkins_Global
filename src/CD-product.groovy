@@ -46,9 +46,9 @@ node{
         String ARTIFACT_PATH_FULL = "${WORKSPACE}/${ARTIFACT_PATH}"
 
         echo "STEP 1. Create a Folder"
-        createFolder("${WORKSPACE}")
+        createFolder()
         echo "STEP 2. COPY properties, logback and Context.xml"
-        copyProperties("${SERVICENAME}", "${WORKSPACE}")
+        copyProperties("${SERVICENAME}")
         echo "STEP 3. Update Jar files"
         updateJar(ARTIFACT_PATH_FULL)
         archiveArtifacts 'target/*.war*'
@@ -77,14 +77,15 @@ node{
     }
 }
 
-void createFolder(String current) {
-    sh "mkdir -p ${current}/WEB-INF/classes"
+void createFolder() {
+    sh "mkdir -p WEB-INF/classes"
+    sh "mkdir -p META-INF/"
 }
 
-void copyProperties(String service, String current) {
-    sh "cp prod/${service}Logback.xml ${current}/WEB-INF/classes/logback.xml"
-    sh "cp prod/${service}.properties ${current}/WEB-INF/classes/service.properties"
-    sh "cp prod/${service}.context ${current}/META-INF/context.xml"
+void copyProperties(String service) {
+    sh "cp prod/${service}Logback.xml WEB-INF/classes/logback.xml"
+    sh "cp prod/${service}.properties WEB-INF/classes/service.properties"
+    sh "cp prod/${service}.context META-INF/context.xml"
 }
 
 void updateJar(artifact){

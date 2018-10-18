@@ -9,7 +9,7 @@ class serviceChecker {
     String baseIp
 
     void setValues(String serviceName){
-        switch ("$SERVICENAME"){
+        switch ("$serviceName"){
             case "shiba" :
                 min = 10
                 max = 19
@@ -94,14 +94,14 @@ class serviceChecker {
     String ins_zone
     String ins_ip
 
-    void checkInstances(String serviceName){
+    void checkInstances(String service){
         sh(script:"gcloud config configurations activate prod", returnStdout: false)
         sh(script:"gcloud compute instances list |grep ${service} |sort -u > current", reutnrStdout: true)
         sh(script:"cat current|awk '{print \$1}'|tail -1 |cut -d'-' -f2 > InsNum", reutnrStdout: false)
         sh(script:"cat current|awk '{print \$1}'|tail -1 > InsName", reutnrStdout: false)
         sh(script:"cat current|awk '{print \$2}'|tail -1 > InsZone", reutnrStdout: false)
         sh(script:"cat current|awk '{print \$4}'|tail -1 > InsIpaddr", reutnrStdout: false)
-        ins_num = readFile('InsNum').trim();
+        ins_num = readFile('InsNum').trim()
         ins_zone = readFile('InsZone').trim()
         ins_ip = readFile('InsIpaddr').trim()
     }
@@ -119,15 +119,15 @@ class serviceChecker {
         }
     }
 
-    String getInsNum(String serviceName)
+    String getInsNum()
     {
         return ins_num
     }
-    String getCurIP(String serviceName)
+    String getCurIP()
     {
         return ins_ip
     }
-    String getInsZone(String serviceName)
+    String getInsZone()
     {
         switch (ins_zone){
             case "australia-southeast1-a" :

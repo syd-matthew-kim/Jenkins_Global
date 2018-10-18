@@ -44,12 +44,11 @@ node{
     stage('Setup Configuration Files') {
         String ARTIFACT_PATH = sh(script: "ls target/*.war", returnStdout: true).trim()
         String ARTIFACT_PATH_FULL = "${WORKSPACE}/${ARTIFACT_PATH}"
-        instanceGroup IG = new instanceGroup()
 
         echo "STEP 1. Create a Folder"
-        IG.createFolder("${WORKSPACE}")
+        createFolder("${WORKSPACE}")
         echo "STEP 2. COPY properties, logback and Context.xml"
-        IG.copyProperties("${SERVICENAME}", "${WORKSPACE}")
+        copyProperties("${SERVICENAME}", "${WORKSPACE}")
         echo "STEP 3. Update Jar files"
         updateJar(ARTIFACT_PATH_FULL)
         archiveArtifacts 'target/*.war*'
@@ -58,7 +57,7 @@ node{
     stage('Deploy.') {
         String WAR_PATH_RELATIVE = sh(script: "ls target/*.war", returnStdout: true).trim()
         String WAR_PATH_FULL = "${WORKSPACE}/${WAR_PATH_RELATIVE}"
-        instanceGroup IG = new instanceGroup()
+        def IG = new au.com.petcircle.JenkinsPP.global.instanceGroup()
         String svrIP = IG.getSvrIP("${SERVICENAME}", "1")
         String svrName = IG.getSvrName("${SERVICENAME}", "1")
 
@@ -74,8 +73,18 @@ node{
         }
 
         echo "[END] Update Version Screen [END]"
-        IG.updateVer("${SERVICENAME}", "${svrName}", "${VERSION}", TODAY)
+        updateVer("${SERVICENAME}", "${svrName}", "${VERSION}", TODAY)
     }
+}
+
+void createFolder(String current) {
+    sh "mkdir -p ${current}/WEB-INF/classes"
+}
+
+void copyProperties(String service, String current) {
+    sh "cp prod/${service}Logback.xml ${current}/WEB-INF/classes/logback.xml"
+    sh "cp prod/${service}.properties ${current}/WEB-INF/classes/service.properties"
+    sh "cp prod/${service}.context ${current}/META-INF/context.xml"
 }
 
 void updateJar(artifact){
@@ -89,4 +98,8 @@ String deploy(warPathFull, severIP, service, username, password) {
             "'http://${username}:${password}@${severIP}/manager/text/deploy" +
             "?path=/${service}&update=true'", returnStdout: true
     return output
+}
+
+void updateVer(String service, String dest, String version, String today) {
+    sh "sed -i \\\"s/${dest}.*/${dest}=${version},${today}/\\\" /opt/currentVersion/${service}"
 }

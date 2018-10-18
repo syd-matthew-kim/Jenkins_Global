@@ -4,20 +4,6 @@ package au.com.petcircle.JenkinsPP.global
 
 class instanceGroup {
 
-    void createFolder(String current) {
-        sh "mkdir -p ${current}/WEB-INF/classes"
-    }
-
-    void copyProperties(String service, String current) {
-        sh "cp prod/${service}Logback.xml ${current}/WEB-INF/classes/logback.xml"
-        sh "cp prod/${service}.properties ${current}/WEB-INF/classes/service.properties"
-        sh "cp prod/${service}.context ${current}/META-INF/context.xml"
-    }
-
-    void updateVer(String service, String dest, String version, String today) {
-        sh "sed -i \\\"s/${dest}.*/${dest}=${version},${today}/\\\" /opt/currentVersion/${service}"
-    }
-
     String svrIP1, svrIP2, svrName1, svrName2
     void setSvrIPs(String service) {
 

@@ -38,25 +38,25 @@ class instanceGroup {
         }
     }
 
-    String getSvrIP(String service, String svrNumber)
+    String getSvrIP(String service, String whereto)
     {
         setSvrIPs(service)
-        if (svrNumber == "1" )
+        if (whereto == "Alpha" )
         {
             return svrIP1
-        }else
+        }else if(whereto == "Beta")
         {
             return svrIP2
         }
     }
 
-    String getSvrName(String service, String svrNumber)
+    String getSvrName(String service, String whereto)
     {
         setSvrIPs(service)
-        if (svrNumber == "1" )
+        if (whereto == "Alpha" )
         {
             return svrName1
-        }else
+        }else if (whereto == "Beta")
         {
             return svrName2
         }

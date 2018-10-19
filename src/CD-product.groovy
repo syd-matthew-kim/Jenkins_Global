@@ -7,6 +7,7 @@ node{
     String SERVICENAME = "${params.service}".trim()
     String SERVICENAME1 = "${params.service1}".trim()
     String VERSION = "${params.version}".trim()
+    String WHERETO = "${whereto.version}".trim()
     String WORKSPACE = pwd()
     Date date = new Date()
     String TODAY = date.format("yyyy-MM-dd HH-mm-ss")
@@ -58,8 +59,8 @@ node{
         String WAR_PATH_RELATIVE = sh(script: "ls target/*.war", returnStdout: true).trim()
         String WAR_PATH_FULL = "${WORKSPACE}/${WAR_PATH_RELATIVE}"
         def IG = new au.com.petcircle.JenkinsPP.global.instanceGroup()
-        String svrIP = IG.getSvrIP("${SERVICENAME}", "1")
-        String svrName = IG.getSvrName("${SERVICENAME}", "1")
+        String svrIP = IG.getSvrIP("${SERVICENAME}", "${WHERETO}")
+        String svrName = IG.getSvrName("${SERVICENAME}", "${WHERETO}")
 
         withCredentials([usernamePassword(credentialsId: 'Manager_Tomcat', passwordVariable: 'manager_pass', usernameVariable: 'manager_id')]) {
             echo "Deploying application to http://${svrIP}/${SERVICENAME}"
@@ -89,9 +90,9 @@ void copyProperties(String service) {
 }
 
 void updateJar(artifact){
-    sh script:"cp ${artifact} ${artifact}.old", reutnrStdout: true
-    sh script:"jar uvf ${artifact} WEB-INF/classes/", reutnrStdout: true
-    sh script:"jar uvf ${artifact} META-INF/context.xml", reutnrStdout: true
+    sh script:"cp ${artifact} ${artifact}.old", reutnrStdout: false
+    sh script:"jar uvf ${artifact} WEB-INF/classes/", reutnrStdout: false
+    sh script:"jar uvf ${artifact} META-INF/context.xml", reutnrStdout: false
 }
 
 String deploy(warPathFull, severIP, service, username, password) {
@@ -101,6 +102,6 @@ String deploy(warPathFull, severIP, service, username, password) {
     return output
 }
 
-void updateVer(String service, String dest, String version, String today) {
-    sh "sed -i \\\"s/${dest}.*/${dest}=${version},${today}/\\\" /opt/currentVersion/${service}"
+void updateVer(String service, String dest, String version, String today){
+    sh "sed -i \"s/${dest}.*/${dest}=${version},${today}/\" /opt/currentVersion/${service}"
 }

@@ -59,8 +59,8 @@ node{
         String WAR_PATH_RELATIVE = sh(script: "ls target/*.war", returnStdout: true).trim()
         String WAR_PATH_FULL = "${WORKSPACE}/${WAR_PATH_RELATIVE}"
         def IG = new au.com.petcircle.JenkinsPP.global.instanceGroup()
-        String svrIP = IG.getSvrIP("${SERVICENAME}", "${WHERETO}")
-        String svrName = IG.getSvrName("${SERVICENAME}", "${WHERETO}")
+        String svrIP = IG.getSvrIP("${SERVICENAME}", "${WHERETO}", false)
+        String svrName = IG.getSvrName("${SERVICENAME}", "${WHERETO}", false)
 
         withCredentials([usernamePassword(credentialsId: 'Manager_Tomcat', passwordVariable: 'manager_pass', usernameVariable: 'manager_id')]) {
             echo "Deploying application to http://${svrIP}/${SERVICENAME}"

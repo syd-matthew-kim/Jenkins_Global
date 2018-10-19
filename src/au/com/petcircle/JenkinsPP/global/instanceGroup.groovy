@@ -13,10 +13,10 @@ class instanceGroup {
                 devIP2 = "10.40.10.22"
                 prodIP1 = "10.50.10.21"
                 prodIP2 = "10.50.10.22"
-                devName1 = "ig101-dev"
-                devName2 = "ig102-dev"
-                prodName1 = "ig101"
-                prodName2 = "ig102"
+                devName1 = "yellow01-dev"
+                devName2 = "yellow02-dev"
+                prodName1 = "yellow01"
+                prodName2 = "yellow02"
                 break
 
             case "merch": case "order": case "search":
@@ -24,10 +24,10 @@ class instanceGroup {
                 devIP2 = "10.40.10.32"
                 prodIP1 = "10.50.10.31"
                 prodIP2 = "10.50.10.32"
-                devName1 = "ig201-dev"
-                devName2 = "ig202-dev"
-                prodName1 = "ig201"
-                prodName2 = "ig202"
+                devName1 = "black01-dev"
+                devName2 = "black02-dev"
+                prodName1 = "black01"
+                prodName2 = "black02"
                 break
 
             case "payment" : case "customer":
@@ -35,10 +35,10 @@ class instanceGroup {
                 devIP2 = "10.40.10.42"
                 prodIP1 = "10.50.10.41"
                 prodIP2 = "10.50.10.42"
-                devName1 = "ig301-dev"
-                devName2 = "ig302-dev"
-                prodName1 = "ig301"
-                prodName2 = "ig302"
+                devName1 = "red01-dev"
+                devName2 = "red02-dev"
+                prodName1 = "red01"
+                prodName2 = "red02"
                 break
 
             case "shipping":
@@ -46,8 +46,8 @@ class instanceGroup {
                 devIP2 = "10.40.10.52"
                 prodIP1 = "10.50.10.51"
                 prodIP2 = "10.50.10.52"
-                devName1 = "ig401-dev"
-                devName2 = "ig402-dev"
+                devName1 = "chocolate01-dev"
+                devName2 = "chocolate02-dev"
                 prodName1 = "ig401"
                 prodName2 = "ig402"
                 break
@@ -87,19 +87,19 @@ class instanceGroup {
         {
             if (isProd)
             {
-                return prodName1
+                return "labrador-"+prodName1
             }else
             {
-                return devName1
+                return "labrador-"+devName1
             }
         }else if (whereto == "Beta")
         {
             if (isProd)
             {
-                return prodName2
+                return "labrador-"+prodName2
             }else
             {
-                return devName2
+                return "labrador-"+devName2
             }
         }
     }

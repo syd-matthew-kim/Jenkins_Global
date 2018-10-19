@@ -7,7 +7,7 @@ node{
     String SERVICENAME = "${params.service}".trim()
     String SERVICENAME1 = "${params.service1}".trim()
     String VERSION = "${params.version}".trim()
-    String WHERETO = "${whereto.version}".trim()
+    String WHERETO = "${params.whereto}".trim()
     String WORKSPACE = pwd()
     Date date = new Date()
     String TODAY = date.format("yyyy-MM-dd HH-mm-ss")
@@ -49,7 +49,7 @@ node{
         echo "STEP 1. Create a Folder"
         createFolder()
         echo "STEP 2. COPY properties, logback and Context.xml"
-        copyProperties("${SERVICENAME}")
+        copyProperties("${SERVICENAME}", false)
         echo "STEP 3. Update Jar files"
         updateJar(ARTIFACT_PATH_FULL)
         archiveArtifacts 'target/*.war*'
@@ -83,10 +83,18 @@ void createFolder() {
     sh "mkdir -p META-INF/"
 }
 
-void copyProperties(String service) {
-    sh "cp prod/${service}Logback.xml WEB-INF/classes/logback.xml"
-    sh "cp prod/${service}.properties WEB-INF/classes/service.properties"
-    sh "cp prod/${service}.context META-INF/context.xml"
+void copyProperties(String service, boolean isProd) {
+    String a;
+    if (isProd)
+    {
+        a = "prod"
+    } else
+    {
+        a = "test"
+    }
+    sh "cp ${a}/${service}Logback.xml WEB-INF/classes/logback.xml"
+    sh "cp ${a}/${service}.properties WEB-INF/classes/service.properties"
+    sh "cp ${a}/${service}.context META-INF/context.xml"
 }
 
 void updateJar(artifact){
@@ -97,7 +105,7 @@ void updateJar(artifact){
 
 String deploy(warPathFull, severIP, service, username, password) {
     String output = sh script: "curl --upload-file '${warPathFull}' " +
-            "'http://${username}:${password}@${severIP}/manager/text/deploy" +
+            "'http://${username}:${password}@${severIP}:8080/manager/text/deploy" +
             "?path=/${service}&update=true'", returnStdout: true
     return output
 }

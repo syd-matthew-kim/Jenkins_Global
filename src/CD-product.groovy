@@ -10,7 +10,7 @@ node{
     String WHERETO = "${params.whereto}".trim()
     String WORKSPACE = pwd()
     Date date = new Date()
-    String TODAY = date.format("yyyy-MM-dd HH-mm-ss")
+    String TODAY = date.format("yyyy-MM-dd HH:mm:ss")
 
     stage('Vallidation & Check Password') {
         if ("$SERVICENAME" != "$SERVICENAME1")

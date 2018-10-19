@@ -57,7 +57,7 @@ class instanceGroup {
     String getSvrIP(String service, String whereto, boolean isProd)
     {
         setSvrIPs(service)
-        if (whereto == "Alpha" )
+        if (whereto == "01" )
         {
             if (isProd)
             {
@@ -67,7 +67,7 @@ class instanceGroup {
                 return devIP1
             }
 
-        }else if(whereto == "Beta")
+        }else if(whereto == "02")
         {
             if (isProd)
             {
@@ -83,7 +83,7 @@ class instanceGroup {
     String getSvrName(String service, String whereto, boolean isProd)
     {
         setSvrIPs(service)
-        if (whereto == "Alpha" )
+        if (whereto == "01" )
         {
             if (isProd)
             {
@@ -92,7 +92,7 @@ class instanceGroup {
             {
                 return "labrador-"+devName1
             }
-        }else if (whereto == "Beta")
+        }else if (whereto == "02")
         {
             if (isProd)
             {

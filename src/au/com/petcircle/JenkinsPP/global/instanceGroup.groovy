@@ -30,7 +30,7 @@ class instanceGroup {
                 prodName2 = "black02"
                 break
 
-            case "payment" : case "customer":
+            case "payment" : case "customer": case "auth":
                 devIP1 = "10.40.10.41"
                 devIP2 = "10.40.10.42"
                 prodIP1 = "10.50.10.41"

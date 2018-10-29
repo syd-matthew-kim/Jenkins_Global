@@ -48,8 +48,8 @@ class instanceGroup {
                 prodIP2 = "10.50.10.52"
                 devName1 = "chocolate01-dev"
                 devName2 = "chocolate02-dev"
-                prodName1 = "ig401"
-                prodName2 = "ig402"
+                prodName1 = "chocolate01"
+                prodName2 = "chocolate02"
                 break
         }
     }

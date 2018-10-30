@@ -8,17 +8,6 @@ class instanceGroup {
     void setSvrIPs(String service) {
 
         switch (service) {
-            case "shiba":
-                devIP1 = "10.40.0.11"
-                devIP2 = "10.40.0.12"
-                prodIP1 = "10.50.0.11"
-                prodIP2 = "10.50.0.12"
-                devName1 = "shiba01-dev"
-                devName2 = "shiba02-dev"
-                prodName1 = "shiba01"
-                prodName2 = "shiba02"
-                break
-
             case "product" : case "review":
                 devIP1 = "10.40.10.21"
                 devIP2 = "10.40.10.22"
@@ -62,6 +51,18 @@ class instanceGroup {
                 prodName1 = "chocolate01"
                 prodName2 = "chocolate02"
                 break
+
+            case "shiba":
+                devIP1 = "10.40.0.11"
+                devIP2 = "10.40.0.12"
+                prodIP1 = "10.50.0.11"
+                prodIP2 = "10.50.0.12"
+                devName1 = "shiba01-dev"
+                devName2 = "shiba02-dev"
+                prodName1 = "shiba01"
+                prodName2 = "shiba02"
+                break
+
         }
     }
 
@@ -95,7 +96,7 @@ class instanceGroup {
     {
         setSvrIPs(service)
 
-        if (service == shiba)
+        if (service == "shiba")
         {
             if (whereto == "01" )
             {

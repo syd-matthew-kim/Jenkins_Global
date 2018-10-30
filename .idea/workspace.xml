@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="765e68ff-7f16-42c6-82b0-14fd755e1de7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Ansible_Scripts/3.install_tomcat.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/1.0_SHIBA_PROD_ENVIRONMENT.jenkins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CD-product.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/CD-product.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -17,35 +18,40 @@
     <session id="11626915">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="groovy" value="8" />
-          <entry key="jenkins" value="1" />
+          <entry key="jenkins" value="3" />
+          <entry key="yml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="9" />
+          <entry key="Groovy" value="11" />
+          <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="groovy" value="4166" />
-          <entry key="jenkins" value="606" />
+          <entry key="groovy" value="4277" />
+          <entry key="jenkins" value="753" />
           <entry key="txt" value="8" />
+          <entry key="yml" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="4772" />
+          <entry key="Groovy" value="5030" />
           <entry key="PLAIN_TEXT" value="8" />
+          <entry key="YAML" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -68,8 +74,35 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="843">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="885">
+              <caret line="115" column="27" selection-start-line="115" selection-start-column="27" selection-end-line="115" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ansible_Scripts/3.install_tomcat.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="466">
+              <caret line="139" column="8" lean-forward="true" selection-start-line="139" selection-start-column="8" selection-end-line="139" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/2.0_MS_PROD_ENVIRONMENT.jenkins">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="91" column="10" lean-forward="true" selection-start-line="91" selection-start-column="10" selection-end-line="91" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/1.0_SHIBA_PROD_ENVIRONMENT.jenkins">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="93" column="18" lean-forward="true" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -98,7 +131,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CD-product.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
+            <state relative-caret-position="930">
               <caret line="62" column="67" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="67" />
             </state>
           </provider>
@@ -118,6 +151,7 @@
       <find>svrName</find>
       <find>alpha</find>
       <find>WHERETO</find>
+      <find>copyProperties</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -142,6 +176,9 @@
         <option value="$PROJECT_DIR$/src/version.groovy" />
         <option value="$PROJECT_DIR$/abc.groovy" />
         <option value="$PROJECT_DIR$/src/CD-product.groovy" />
+        <option value="$PROJECT_DIR$/Ansible_Scripts/3.install_tomcat.yml" />
+        <option value="$PROJECT_DIR$/src/2.0_MS_PROD_ENVIRONMENT.jenkins" />
+        <option value="$PROJECT_DIR$/src/1.0_SHIBA_PROD_ENVIRONMENT.jenkins" />
         <option value="$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy" />
       </list>
     </option>
@@ -152,11 +189,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="67" />
-    <option name="y" value="25" />
-    <option name="width" value="1853" />
-    <option name="height" value="1055" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2192" />
+    <option name="y" value="80" />
+    <option name="width" value="1390" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -164,8 +201,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -178,22 +213,18 @@
               <item name="Jenkins_Global" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Jenkins_Global" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Jenkins_Global" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="global" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539922597969" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540875457711" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -240,7 +271,9 @@
       <updated>1539753316444</updated>
       <workItem from="1539753320283" duration="21467000" />
       <workItem from="1539900023375" duration="8947000" />
-      <workItem from="1539922618263" duration="1252000" />
+      <workItem from="1539922618263" duration="4143000" />
+      <workItem from="1540358779294" duration="613000" />
+      <workItem from="1540789347870" duration="4181000" />
     </task>
     <task id="LOCAL-00001" summary="modified">
       <created>1539756721637</created>
@@ -340,17 +373,38 @@
       <option name="project" value="LOCAL" />
       <updated>1539921592875</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="modified">
+      <created>1539926335425</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1539926335425</updated>
+    </task>
+    <task id="LOCAL-00016" summary="modified">
+      <created>1540253573125</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1540253573125</updated>
+    </task>
+    <task id="LOCAL-00017" summary="modified">
+      <created>1540792653277</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1540792653277</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31666000" />
+    <option name="totallyTimeSpent" value="39351000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <frame x="1920" y="-2" width="1920" height="1082" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.255119" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25186765" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -422,15 +476,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CD-product.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
+        <state relative-caret-position="930">
           <caret line="62" column="67" selection-start-line="62" selection-start-column="60" selection-end-line="62" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ansible_Scripts/3.install_tomcat.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="139" column="8" lean-forward="true" selection-start-line="139" selection-start-column="8" selection-end-line="139" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/2.0_MS_PROD_ENVIRONMENT.jenkins">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="91" column="10" lean-forward="true" selection-start-line="91" selection-start-column="10" selection-end-line="91" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/1.0_SHIBA_PROD_ENVIRONMENT.jenkins">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="93" column="18" lean-forward="true" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="843">
-          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="885">
+          <caret line="115" column="27" selection-start-line="115" selection-start-column="27" selection-end-line="115" selection-end-column="27" />
         </state>
       </provider>
     </entry>

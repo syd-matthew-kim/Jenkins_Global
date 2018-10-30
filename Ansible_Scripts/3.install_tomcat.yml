@@ -1,0 +1,161 @@
+---
+- hosts: test
+  become_user: root
+  become: yes
+  tasks:
+  - name: update yum
+    yum: name='*' state=latest
+
+  - name: yum - install java
+    yum: name='{{ item }}' state=present
+    with_items:
+    - java-1.8.0-openjdk.x86_64
+    - java-1.8.0-openjdk-devel.x86_64
+
+  - name: add group tomcat
+    shell: groupadd tomcat
+
+  - name: create tomcat directory
+    file: path=/opt/tomcat state=directory
+
+  - name: create special tomcat user
+    shell: useradd -s /bin/nologin -g tomcat -d /opt/tomcat tomcat
+
+  - name: change tomcat directory ownership
+    file: path=/opt/tomcat owner=tomcat group=tomcat mode=0755
+
+  - name: download tomcat package
+    get_url: url={{ item }} dest=/tmp/apache-tomcat-8.5.31.tar.gz
+    with_items:
+    - https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.31/bin/apache-tomcat-8.5.31.tar.gz
+
+  - name: install tomcat from the downloaded pack
+    shell: tar -xvzf /tmp/apache-tomcat-8.5.31.tar.gz -C /opt/tomcat --strip-components=1
+
+  - name: change owner:group on the tomcat folder
+    file:
+      path: /opt/tomcat
+      owner: tomcat
+      group: tomcat
+      recurse: yes
+
+  - name: change mod on the tomcat conf folder
+    file: path=/opt/tomcat/conf/ mode="g+rwx"
+
+  - name: change mod on the tomcat bin folder
+    file: path=/opt/tomcat/bin/ mode="g+rwx"
+
+  - name: copy over the base tomcat.service file 1 (without overops)
+    copy: src=tomcat.service dest=/etc/systemd/system/tomcat.service
+
+  - name: start and enable tomcat
+    service: name=tomcat state=started enabled=yes
+
+  - name: install the overops/takipi package from a remote repo
+    yum:
+      name: https://d16f8x4wee2da2.cloudfront.net/deploy/linux/takipi.rpm
+      state: present
+
+  - name: initialise overops/takipi
+    shell: /opt/takipi/etc/takipi-setup-package "S110146C9LLqIl0BEJtfd7uIK1Ns4BP6wpzaKs0wpZDNLN66NfN1dGU+0m04pw5ls=28f8"
+
+  - name: download mysql-connector jar
+    get_url:
+      url: http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar
+      dest: /opt/tomcat/lib/mysql-connector-java-5.1.38.jar
+      mode: 0640
+
+  - name: download hikari jar
+    get_url:
+      url: http://central.maven.org/maven2/com/zaxxer/HikariCP/2.4.7/HikariCP-2.4.7.jar
+      dest: /opt/tomcat/lib/HikariCP-2.4.7.jar
+      mode: 0640
+
+  - name: download asf4j-api jar
+    get_url:
+      url: http://central.maven.org/maven2/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar
+      dest: /opt/tomcat/lib/slf4j-api-1.7.21.jar
+      mode: 0640
+
+  - name: download asf4j-simple jar
+    get_url:
+      url: http://central.maven.org/maven2/org/slf4j/slf4j-simple/1.7.21/slf4j-simple-1.7.21.jar
+      dest: /opt/tomcat/lib/slf4j-simple-1.7.21.jar
+      mode: 0640
+
+  - name: set up the jar ownership to tomcat:tomcat
+    file: path=/opt/tomcat/lib owner=tomcat group=tomcat recurse=yes
+
+  - name: initialise SSL cert keystore
+    shell: |
+      keytool -genkey -noprompt -keyalg RSA -alias petcircle -dname "CN=petcircle.com.au, OU=PC, O=PetCircle, L=Sydney, ST=NSW, C=AU" -keystore /opt/tomcat/conf/keystore -storepass pawspaws -keypass pawspaws
+
+  - name: change keystore ownership to tomcat
+    file: path=/opt/tomcat/conf/keystore owner=tomcat group=tomcat
+
+  - name: install tomcat-native libraries
+    yum: name=tomcat-native.x86_64 state=present
+
+  - name: set up tomcat-users.xml
+    copy:
+      src: tomcat-users.xml
+      dest: /opt/tomcat/conf/tomcat-users.xml
+      owner: tomcat
+      group: tomcat
+      mode: 0600
+
+  - name: set up context.xml
+    copy:
+      src: context.xml
+      dest: /opt/tomcat/webapps/manager/META-INF/context.xml
+      owner: tomcat
+      group: tomcat
+      mode: 0600
+
+  - name: set up template server.xml
+    copy:
+      src: server.xml
+      dest: /opt/tomcat/conf/server.xml
+      owner: tomcat
+      group: tomcat
+      mode: 0600
+
+  - name: docs context from tomcat
+    file:
+      state: absent
+      path: "/opt/tomcat/webapps/docs"
+
+  - name: example context from tomcat
+    file:
+      state: absent
+      path: "/opt/tomcat/webapps/examples"
+
+  - name: change java random source (known issue fix)
+    lineinfile:
+      path: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-0.el7_5.x86_64/jre/lib/security/java.security
+      regexp: 'securerandom\.source=file:\/dev\/random'
+      line: 'securerandom.source=file:/dev/urandom'
+
+  - name: install the authbind rpm from a remote repo
+    yum:
+      name: https://s3.amazonaws.com/aaronsilber/public/authbind-2.1.1-0.1.x86_64.rpm
+      state: present
+
+  - name: touch 80 file with owner:group and mode
+    file:
+      path: /etc/authbind/byport/80
+      state: touch
+      owner: tomcat
+      group: tomcat
+      mode : 0500
+
+  - name: touch 443 file with owner:group and mode
+    file:
+      path: /etc/authbind/byport/443
+      state: touch
+      owner: tomcat
+      group: tomcat
+      mode : 0500
+
+  - name: restart tomcat
+    service: name=tomcat state=restarted

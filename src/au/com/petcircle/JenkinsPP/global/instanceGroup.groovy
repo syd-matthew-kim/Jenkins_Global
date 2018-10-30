@@ -8,6 +8,17 @@ class instanceGroup {
     void setSvrIPs(String service) {
 
         switch (service) {
+            case "shiba":
+                devIP1 = "10.40.0.11"
+                devIP2 = "10.40.0.12"
+                prodIP1 = "10.50.0.11"
+                prodIP2 = "10.50.0.12"
+                devName1 = "shiba01-dev"
+                devName2 = "shiba02-dev"
+                prodName1 = "shiba01"
+                prodName2 = "shiba02"
+                break
+
             case "product" : case "review":
                 devIP1 = "10.40.10.21"
                 devIP2 = "10.40.10.22"
@@ -83,23 +94,48 @@ class instanceGroup {
     String getSvrName(String service, String whereto, boolean isProd)
     {
         setSvrIPs(service)
-        if (whereto == "01" )
+
+        if (service == shiba)
         {
-            if (isProd)
+            if (whereto == "01" )
             {
-                return "labrador-"+prodName1
-            }else
+                if (isProd)
+                {
+                    return prodName1
+                }else
+                {
+                    return devName1
+                }
+            }else if (whereto == "02")
             {
-                return "labrador-"+devName1
+                if (isProd)
+                {
+                    return prodName2
+                }else
+                {
+                    return devName2
+                }
             }
-        }else if (whereto == "02")
-        {
-            if (isProd)
+
+        }else{
+            if (whereto == "01" )
             {
-                return "labrador-"+prodName2
-            }else
+                if (isProd)
+                {
+                    return "labrador-"+prodName1
+                }else
+                {
+                    return "labrador-"+devName1
+                }
+            }else if (whereto == "02")
             {
-                return "labrador-"+devName2
+                if (isProd)
+                {
+                    return "labrador-"+prodName2
+                }else
+                {
+                    return "labrador-"+devName2
+                }
             }
         }
     }

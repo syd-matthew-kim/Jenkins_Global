@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="765e68ff-7f16-42c6-82b0-14fd755e1de7" name="Default Changelist" comment="modified">
+    <list default="true" id="765e68ff-7f16-42c6-82b0-14fd755e1de7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/1.0_SHIBA_TEST_ENVIRONMENT.jenkins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/1.0_SHIBA_PROD_ENVIRONMENT.jenkins" beforeDir="false" afterPath="$PROJECT_DIR$/src/1.0_SHIBA_PROD_ENVIRONMENT.jenkins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -47,22 +47,22 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="groovy" value="8" />
-          <entry key="jenkins" value="3" />
+          <entry key="jenkins" value="4" />
           <entry key="sql" value="2" />
           <entry key="yml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="11" />
+          <entry key="Groovy" value="12" />
           <entry key="Scratch" value="2" />
           <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="groovy" value="4326" />
-          <entry key="jenkins" value="763" />
+          <entry key="groovy" value="4383" />
+          <entry key="jenkins" value="773" />
           <entry key="sql" value="683" />
           <entry key="txt" value="16" />
           <entry key="yml" value="15" />
@@ -70,7 +70,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="5089" />
+          <entry key="Groovy" value="5156" />
           <entry key="PLAIN_TEXT" value="16" />
           <entry key="Scratch" value="683" />
           <entry key="YAML" value="15" />
@@ -96,8 +96,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2355">
-              <caret line="157" column="48" lean-forward="true" selection-start-line="157" selection-start-column="48" selection-end-line="157" selection-end-column="48" />
+            <state relative-caret-position="495">
+              <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -114,8 +114,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/2.0_MS_PROD_ENVIRONMENT.jenkins">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1110">
-              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+            <state relative-caret-position="435">
+              <caret line="62" column="73" lean-forward="true" selection-start-line="62" selection-start-column="73" selection-end-line="62" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/1.0_SHIBA_TEST_ENVIRONMENT.jenkins">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -188,6 +197,7 @@
       <find>shiba</find>
       <find>copyProperties</find>
       <find>ls target</find>
+      <find>isProd</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -213,10 +223,11 @@
         <option value="$PROJECT_DIR$/abc.groovy" />
         <option value="$PROJECT_DIR$/src/CD-product.groovy" />
         <option value="$PROJECT_DIR$/Ansible_Scripts/3.install_tomcat.yml" />
-        <option value="$PROJECT_DIR$/src/2.0_MS_PROD_ENVIRONMENT.jenkins" />
         <option value="$PROJECT_DIR$/src/1.0_SHIBA_PROD_ENVIRONMENT.jenkins" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/9c6dd746-92e7-44b0-b28f-19b4586bcdb5/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/1bf1aa26-bbf1-45de-b3d7-bb87505e2400/console.sql" />
+        <option value="$PROJECT_DIR$/src/2.0_MS_PROD_ENVIRONMENT.jenkins" />
+        <option value="$PROJECT_DIR$/src/1.0_SHIBA_TEST_ENVIRONMENT.jenkins" />
         <option value="$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy" />
       </list>
     </option>
@@ -269,7 +280,7 @@
     <property name="DatabaseDriversLRU" value="mysql&#10;mariadb" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541042189199" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542164389872" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -323,7 +334,7 @@
       <workItem from="1540358779294" duration="613000" />
       <workItem from="1540789347870" duration="16866000" />
       <workItem from="1541042216546" duration="599000" />
-      <workItem from="1542162463195" duration="277000" />
+      <workItem from="1542162463195" duration="1697000" />
     </task>
     <task id="LOCAL-00001" summary="modified">
       <created>1539756721637</created>
@@ -458,11 +469,32 @@
       <option name="project" value="LOCAL" />
       <updated>1540876963180</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="modified">
+      <created>1542162931920</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1542162931920</updated>
+    </task>
+    <task id="LOCAL-00021" summary="modified">
+      <created>1542162989261</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1542162989261</updated>
+    </task>
+    <task id="LOCAL-00022" summary="modified">
+      <created>1542163009981</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1542163009981</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52912000" />
+    <option name="totallyTimeSpent" value="54332000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-2" width="1920" height="1082" extended-state="6" />
@@ -572,15 +604,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/2.0_MS_PROD_ENVIRONMENT.jenkins">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="435">
+          <caret line="62" column="73" lean-forward="true" selection-start-line="62" selection-start-column="73" selection-end-line="62" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/1.0_SHIBA_TEST_ENVIRONMENT.jenkins">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/au/com/petcircle/JenkinsPP/global/instanceGroup.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2355">
-          <caret line="157" column="48" lean-forward="true" selection-start-line="157" selection-start-column="48" selection-end-line="157" selection-end-column="48" />
+        <state relative-caret-position="495">
+          <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
         </state>
       </provider>
     </entry>

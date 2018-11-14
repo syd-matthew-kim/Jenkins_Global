@@ -69,8 +69,8 @@ class instanceGroup {
                 break
 
             case "shiba":
-                devIP1 = "10.40.0.11"
-                devIP2 = "10.40.0.12"
+                devIP1 = "10.40.0.10"
+                devIP2 = "10.40.0.11"
                 prodIP1 = "10.50.0.11"
                 prodIP2 = "10.50.0.12"
                 devName1 = "shiba01-dev"

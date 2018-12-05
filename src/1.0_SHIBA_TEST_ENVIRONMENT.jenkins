@@ -17,7 +17,7 @@ node{
         {
             error("Check your serviceName")
         }
-        withCredentials([string(credentialsId: 'PROD_ID', variable: 'E_secret')]) {
+        withCredentials([string(credentialsId: 'TEST_ID', variable: 'E_secret')]) {
             if ("$E_secret" != "${params.password}") {
                 error("Wrong Password")
             }
@@ -64,7 +64,7 @@ node{
 
 
         withCredentials([usernamePassword(credentialsId: 'Manager_Tomcat', passwordVariable: 'manager_pass', usernameVariable: 'manager_id')]) {
-            echo "Deploying application to http://${svrIP}/"
+            echo "Deploying application to http://${svrIP}/:8080"
             def output = deploy(WAR_PATH_FULL, svrIP, SERVICENAME, env.manager_id, env.manager_pass)
             if (output.contains("FAIL - Deployed application at context path / but context failed to start")) {
                 echo "----- PUPPY deployment log -----"
@@ -109,7 +109,7 @@ void updateJar(artifact){
 
 String deploy(warPathFull, severIP, service, username, password) {
     String output = sh script: "curl --upload-file '${warPathFull}' " +
-            "'http://${username}:${password}@${severIP}/manager/text/deploy" +
+            "'http://${username}:${password}@${severIP}:8080/manager/text/deploy" +
             "?path=/&update=true'", returnStdout: true
     return output
 }

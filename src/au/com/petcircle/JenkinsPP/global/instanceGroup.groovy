@@ -8,7 +8,7 @@ class instanceGroup {
     void setSvrIPs(String service) {
 
         switch (service) {
-            case "product" : case "review":
+            case "product": case "review": case "pick":
                 devIP1 = "10.40.10.21"
                 devIP2 = "10.40.10.22"
                 devIP3 = "10.40.10.26"
@@ -38,7 +38,7 @@ class instanceGroup {
                 prodName3 = "black11"
                 break
 
-            case "payment" : case "customer": case "auth":
+            case "payment" : case "customer": case "auth": case "logistics":
                 devIP1 = "10.40.10.41"
                 devIP2 = "10.40.10.42"
                 devIP3 = "10.40.10.46"
